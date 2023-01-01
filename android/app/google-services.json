@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "590826926408",
+    "project_id": "contact-app-brunodev",
+    "storage_bucket": "contact-app-brunodev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:590826926408:android:fab0560ffd91876432437d",
+        "android_client_info": {
+          "package_name": "br.com.brunodev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "590826926408-i598lqqtcdsosegocgeq1fpqon3fp068.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqFiaCiutXkl2nlsqbNMJzxVNozrhLLH8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "590826926408-i598lqqtcdsosegocgeq1fpqon3fp068.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
