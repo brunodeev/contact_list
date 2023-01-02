@@ -33,7 +33,7 @@ class HomeScreen extends StatelessWidget {
                 case ConnectionState.done:
                   return RefreshIndicator(
                     onRefresh: () async {
-                      await Future.delayed(const Duration(seconds: 2));
+                      await Future.delayed(const Duration(seconds: 1));
                       FirebaseFirestore.instance.collection('contacts').get();
                     },
                     child: ListView.builder(

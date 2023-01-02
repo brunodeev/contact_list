@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:contact_app/screens/edit_contact_screen.dart';
 import 'package:flutter/material.dart';
 
 class DetailContact extends StatelessWidget {
@@ -11,7 +13,7 @@ class DetailContact extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color(0xFF212121),
         centerTitle: true,
-        title: const Text('Novo Contato'),
+        title: const Text('Detalhes'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -57,25 +59,61 @@ class DetailContact extends StatelessWidget {
             const SizedBox(
               height: 25,
             ),
-            SizedBox(
-              height: 40,
-              width: double.infinity,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 39, 39, 39),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                SizedBox(
+                  height: 40,
+                  width: 150,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 52, 109, 194),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => EditContact(
+                            name: name,
+                            number: number,
+                          ),
+                        ),
+                      );
+                    },
+                    child: const Text('Editar'),
                   ),
                 ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('Salvar'),
-              ),
+                SizedBox(
+                  height: 40,
+                  width: 150,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 204, 58, 58),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                    ),
+                    onPressed: () {
+                      deleteContact(name: name);
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('Excluir'),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
       ),
     );
   }
+}
+
+Future deleteContact({required String name}) async {
+  final String nameP = name.toLowerCase();
+  final docUser = FirebaseFirestore.instance.collection('contacts').doc(nameP);
+
+  await docUser.delete();
 }

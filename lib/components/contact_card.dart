@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_interpolation_to_compose_strings
+
 import 'package:contact_app/screens/detail_contact_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +10,15 @@ class ContactCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String formattedPhoneNumber = '(' +
+        number.substring(0, 2) +
+        ")" +
+        number.substring(2, 4) +
+        ' ' +
+        number.substring(4, 8) +
+        '-' +
+        number.substring(8, number.length);
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5),
       child: InkWell(
@@ -17,7 +28,7 @@ class ContactCard extends StatelessWidget {
             MaterialPageRoute(
               builder: (context) => DetailContact(
                 name: name,
-                number: number,
+                number: formattedPhoneNumber,
               ),
             ),
           ),
@@ -33,7 +44,7 @@ class ContactCard extends StatelessWidget {
               child: Text(name.substring(0, 1)),
             ),
             title: Text(name),
-            subtitle: Text(number),
+            subtitle: Text(formattedPhoneNumber),
           ),
         ),
       ),
