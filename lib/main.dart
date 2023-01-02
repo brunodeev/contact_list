@@ -14,12 +14,28 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const HomeScreen(),
-        '/createContact': (context) => CreateContact(),
+    return FutureBuilder(
+      future: Firebase.initializeApp(),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return const Text('Erro');
+        }
+        if (snapshot.connectionState == ConnectionState.done) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            initialRoute: '/',
+            routes: {
+              '/': (context) => const HomeScreen(),
+              '/createContact': (context) => CreateContact(),
+            },
+          );
+        }
+        return Center(
+          child: CircularProgressIndicator(
+            color: Colors.grey[900],
+          ),
+        );
+        ;
       },
     );
   }
