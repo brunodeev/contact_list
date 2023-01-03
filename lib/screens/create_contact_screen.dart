@@ -22,7 +22,7 @@ class _CreateContactState extends State<CreateContact> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF212121),
+        backgroundColor: Color(0xFF212121),
         centerTitle: true,
         title: const Text('Novo Contato'),
       ),
