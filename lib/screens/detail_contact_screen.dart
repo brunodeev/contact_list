@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:contact_app/screens/edit_contact_screen.dart';
 import 'package:flutter/material.dart';
@@ -72,8 +74,8 @@ class DetailContact extends StatelessWidget {
                         borderRadius: BorderRadius.circular(15),
                       ),
                     ),
-                    onPressed: () {
-                      Navigator.of(context).push(
+                    onPressed: () async {
+                      await Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => EditContact(
                             name: name,
@@ -81,6 +83,7 @@ class DetailContact extends StatelessWidget {
                           ),
                         ),
                       );
+                      Navigator.of(context).pop();
                     },
                     child: const Text('Editar'),
                   ),

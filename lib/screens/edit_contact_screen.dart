@@ -100,17 +100,14 @@ class _EditContactState extends State<EditContact> {
                         name: widget.name, number: numberEdit.text);
                     Navigator.of(context).pop();
                   } else if (numberEdit.text.isEmpty) {
-                    updateContactNoNumber(
-                        name: widget.name,
-                        number: widget.number,
-                        nameEdited: nameEdit.text);
+                    addContact(name: nameEdit.text, number: widget.number);
+                    deleteContact(name: widget.name);
+                    Navigator.of(context).pop();
                   } else if (nameEdit.text.isEmpty && numberEdit.text.isEmpty) {
                     Navigator.of(context).pop();
                   } else {
-                    updateContact(
-                        name: widget.name,
-                        number: numberEdit.text,
-                        nameEdited: nameEdit.text);
+                    addContact(name: nameEdit.text, number: numberEdit.text);
+                    deleteContact(name: widget.name);
                     Navigator.of(context).pop();
                   }
                 },
@@ -163,4 +160,24 @@ Future updateContactNoNumber(
   };
 
   await docUser.update(json);
+}
+
+Future addContact({required String name, required String number}) async {
+  final docUser =
+      FirebaseFirestore.instance.collection('contacts').doc(name.toLowerCase());
+
+  final json = {
+    'id': Random().nextInt(10000),
+    'name': name,
+    'number': number,
+  };
+
+  await docUser.set(json);
+}
+
+Future deleteContact({required String name}) async {
+  final String nameP = name.toLowerCase();
+  final docUser = FirebaseFirestore.instance.collection('contacts').doc(nameP);
+
+  await docUser.delete();
 }

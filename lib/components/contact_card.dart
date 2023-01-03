@@ -10,14 +10,16 @@ class ContactCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String formattedPhoneNumber = '(' +
-        number.substring(0, 2) +
-        ")" +
-        number.substring(2, 4) +
-        ' ' +
-        number.substring(4, 8) +
-        '-' +
-        number.substring(8, number.length);
+    String formattedPhoneNumber = number.length < 11
+        ? '(' +
+            number.substring(0, 2) +
+            ")" +
+            number.substring(2, 4) +
+            ' ' +
+            number.substring(4, 8) +
+            '-' +
+            number.substring(8, number.length)
+        : number;
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5),

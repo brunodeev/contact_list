@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-TextField kTextField(
-    String label, TextEditingController controller, TextInputType type) {
+TextField kTextField(String label, TextEditingController controller,
+    TextInputType type, Function(String) onChanged) {
   return TextField(
+    onChanged: onChanged,
     keyboardType: type,
     controller: controller,
     decoration: InputDecoration(
