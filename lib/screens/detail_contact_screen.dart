@@ -4,11 +4,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:contact_app/screens/edit_contact_screen.dart';
 import 'package:flutter/material.dart';
 
-class DetailContact extends StatelessWidget {
+class DetailContact extends StatefulWidget {
   const DetailContact({required this.name, required this.number, super.key});
 
   final String name, number;
 
+  @override
+  State<DetailContact> createState() => _DetailContactState();
+}
+
+class _DetailContactState extends State<DetailContact> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +34,7 @@ class DetailContact extends StatelessWidget {
                     backgroundColor: const Color(0xFF616161),
                     radius: 50,
                     child: Text(
-                      name.substring(0, 1),
+                      widget.name.substring(0, 1),
                       style: const TextStyle(fontSize: 40, color: Colors.white),
                     )),
               ),
@@ -41,7 +46,7 @@ class DetailContact extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  name,
+                  widget.name,
                   style: TextStyle(fontSize: 30, color: Colors.grey[800]),
                 ),
               ],
@@ -53,7 +58,7 @@ class DetailContact extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  number,
+                  widget.number,
                   style: TextStyle(fontSize: 30, color: Colors.grey[800]),
                 ),
               ],
@@ -78,8 +83,8 @@ class DetailContact extends StatelessWidget {
                       await Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => EditContact(
-                            name: name,
-                            number: number,
+                            name: widget.name,
+                            number: widget.number,
                           ),
                         ),
                       );
@@ -98,9 +103,40 @@ class DetailContact extends StatelessWidget {
                         borderRadius: BorderRadius.circular(15),
                       ),
                     ),
-                    onPressed: () {
-                      deleteContact(name: name);
-                      Navigator.of(context).pop();
+                    onPressed: () async {
+                      bool isDelete = false;
+
+                      await showDialog(
+                          context: context,
+                          builder: (_) {
+                            return AlertDialog(
+                              title: const Text('Excluir Contato'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      isDelete = false;
+                                    });
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text('Cancelar'),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      isDelete = true;
+                                    });
+                                    deleteContact(context, name: widget.name);
+                                  },
+                                  child: const Text('Excluir'),
+                                ),
+                              ],
+                            );
+                          });
+
+                      isDelete == true
+                          ? deleteContact(context, name: widget.name)
+                          : null;
                     },
                     child: const Text('Excluir'),
                   ),
@@ -114,9 +150,34 @@ class DetailContact extends StatelessWidget {
   }
 }
 
-Future deleteContact({required String name}) async {
+Future deleteContact(BuildContext context, {required String name}) async {
   final String nameP = name.toLowerCase();
   final docUser = FirebaseFirestore.instance.collection('contacts').doc(nameP);
 
   await docUser.delete();
+  Navigator.pop(context);
+}
+
+deletecont(BuildContext context, bool delete) {
+  showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Excluir Contato'),
+          actions: [
+            TextButton(
+              onPressed: () {},
+              child: const Text('Cancelar'),
+            ),
+            TextButton(
+              onPressed: () {},
+              child: const Text('Excluir'),
+            ),
+          ],
+        );
+      });
+}
+
+changeDelete(bool del) {
+  del = !del;
 }

@@ -5,7 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class CreateContact extends StatefulWidget {
-  CreateContact({super.key});
+  const CreateContact({super.key});
 
   @override
   State<CreateContact> createState() => _CreateContactState();
@@ -22,7 +22,7 @@ class _CreateContactState extends State<CreateContact> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF212121),
+        backgroundColor: const Color(0xFF212121),
         centerTitle: true,
         title: const Text('Novo Contato'),
       ),

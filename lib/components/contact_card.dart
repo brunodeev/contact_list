@@ -10,7 +10,7 @@ class ContactCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String formattedPhoneNumber = number.length < 11
+    String formattedPhoneNumber = number.length <= 12
         ? '(' +
             number.substring(0, 2) +
             ")" +

@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
             initialRoute: '/',
             routes: {
               '/': (context) => const HomeScreen(),
-              '/createContact': (context) => CreateContact(),
+              '/createContact': (context) => const CreateContact(),
             },
           );
         }
@@ -42,7 +42,6 @@ class MyApp extends StatelessWidget {
             ),
           ),
         );
-        ;
       },
     );
   }
