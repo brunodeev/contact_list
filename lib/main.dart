@@ -4,7 +4,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -23,8 +22,7 @@ class MyApp extends StatelessWidget {
               child: Text('Erro'),
             ),
           );
-        }
-        if (snapshot.connectionState == ConnectionState.done) {
+        } else if (snapshot.connectionState == ConnectionState.done) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             initialRoute: '/',
@@ -35,12 +33,7 @@ class MyApp extends StatelessWidget {
           );
         }
         return Container(
-          color: const Color(0xff212121),
-          child: Center(
-            child: CircularProgressIndicator(
-              color: Colors.grey[900],
-            ),
-          ),
+          color: const Color(0xFF212121),
         );
       },
     );

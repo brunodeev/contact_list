@@ -62,7 +62,7 @@ class HomeScreen extends StatelessWidget {
           Align(
             alignment: Alignment.bottomRight,
             child: Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(20.0),
               child: FloatingActionButton(
                 backgroundColor: Colors.grey[900],
                 onPressed: () => {
