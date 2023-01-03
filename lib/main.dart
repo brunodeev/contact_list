@@ -1,5 +1,4 @@
 import 'package:contact_app/screens/create_contact_screen.dart';
-import 'package:contact_app/screens/detail_contact_screen.dart';
 import 'package:contact_app/screens/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +17,12 @@ class MyApp extends StatelessWidget {
       future: Firebase.initializeApp(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return const Text('Erro');
+          return Container(
+            color: const Color(0xff212121),
+            child: const Center(
+              child: Text('Erro'),
+            ),
+          );
         }
         if (snapshot.connectionState == ConnectionState.done) {
           return MaterialApp(
@@ -30,9 +34,12 @@ class MyApp extends StatelessWidget {
             },
           );
         }
-        return Center(
-          child: CircularProgressIndicator(
-            color: Colors.grey[900],
+        return Container(
+          color: const Color(0xff212121),
+          child: Center(
+            child: CircularProgressIndicator(
+              color: Colors.grey[900],
+            ),
           ),
         );
         ;
