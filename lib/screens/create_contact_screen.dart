@@ -13,7 +13,6 @@ class CreateContact extends StatefulWidget {
 
 class _CreateContactState extends State<CreateContact> {
   TextEditingController name = TextEditingController();
-
   TextEditingController number = TextEditingController();
 
   @override

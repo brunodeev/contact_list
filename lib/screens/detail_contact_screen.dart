@@ -110,7 +110,11 @@ class _DetailContactState extends State<DetailContact> {
                           context: context,
                           builder: (_) {
                             return AlertDialog(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15)),
                               title: const Text('Excluir Contato'),
+                              content: const Text(
+                                  'Tem certeza que deseja excluir este contato?'),
                               actions: [
                                 TextButton(
                                   onPressed: () {
@@ -128,7 +132,10 @@ class _DetailContactState extends State<DetailContact> {
                                     });
                                     deleteContact(context, name: widget.name);
                                   },
-                                  child: const Text('Excluir'),
+                                  child: const Text(
+                                    'Excluir',
+                                    style: TextStyle(color: Colors.redAccent),
+                                  ),
                                 ),
                               ],
                             );
